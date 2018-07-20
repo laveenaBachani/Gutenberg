@@ -1,4 +1,3 @@
-import string
 import heapq
 
 def getTotalNumberOfWords(input):
@@ -72,13 +71,3 @@ def get20LeastFrequentWords(text):
     smallest = heapq.nsmallest(1100, heap)
     smallest = [(key, value) for value, key in smallest]
     return smallest
-
-
-
-
-
-
-
-
-
-    
