@@ -143,3 +143,116 @@ def generateSentence(s,firstWord):
         firstWord = keyWord
         map = {}
     return resstr
+
+def getAutocompleteSentence(text, IncompleteSent):
+    punctuations = '''()-[]{};:'"\,<>/@#$%^&*_~'''
+    res = ""
+    for char in text:
+        if char not in punctuations:
+            res = res + char
+    sentSplit = re.compile("[.?!]").split(res)
+    t =Trie()
+    for sent in sentSplit:
+        t.insert(sent.lower())
+    str = ""
+    mathed = []
+    last = t.search(mathed,str,IncompleteSent)
+    if not last:
+        return mathed
+    else:
+        mathed = t.expand(mathed,IncompleteSent,last)
+        return mathed
+
+
+
+
+
+
+
+
+class TrieNode :
+    # Trie node class
+    def __init__(self):
+        self.children = [None] * 27
+
+        # isEndOfWord is True if node represent the end of the word
+        self.isEndOfWord = False
+
+
+
+class Trie:
+# Trie data structure class
+    def __init__(self):
+        self.root = self.getNode()
+
+    def getNode(self):
+
+        # Returns new trie node (initialized to NULLs)
+        return TrieNode()
+
+    def _charToIndex(self, ch):
+
+        # private helper function
+        # Converts key current character into index
+        # use only 'a' through 'z' and lower case
+
+        return ord(ch) - ord('a')
+
+    def insert(self, key):
+
+        # If not present, inserts key into trie
+        # If the key is prefix of trie node,
+        # just marks leaf node
+        pCrawl = self.root
+        length = len(key)
+        for level in range(length):
+            if('\n' not in key[level] and '|' not in key[level] and not key[level].isnumeric()):
+                if(key[level] in ' '):
+                    index = 26
+                else:
+                    index = self._charToIndex(key[level])
+                if not pCrawl.children[index]:
+                    pCrawl.children[index] = self.getNode()
+                pCrawl = pCrawl.children[index]
+
+        # mark last node as leaf
+        pCrawl.isEndOfWord = True
+
+    def search(self,res,s, key):
+        pCrawl = self.root
+        length = len(key)
+        for level in range(length):
+            if key[level] == ' ':
+                index = 26
+            else:
+                index = self._charToIndex(key[level])
+            if index == 26:
+                if not pCrawl.children[26]:
+                    return None
+                s+= chr(32)
+            else:
+                if not pCrawl.children[index]:
+                    return None
+                s += chr(97 + index)
+            pCrawl = pCrawl.children[index]
+        return pCrawl
+
+    def expand(self,res,s,last):
+        for i in range(0,27):
+            if(last.children[i] !=None):
+                if i == 26:
+                    s +=' '
+                else:
+                    num = i+97
+                    s += chr(num)
+                self.expand(res,s,last.children[i])
+        if(last.isEndOfWord):
+            res.append(s)
+
+        return res;
+
+
+
+
+
+

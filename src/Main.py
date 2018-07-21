@@ -18,7 +18,8 @@ def main():
         print("getChapterQuoteAppears ",Utility.getChapterQuoteAppears(s,sentence))
         firstWord = 'the'
         print("generateSentence", Utility.generateSentence(s,firstWord))
-
+        Incompletesentence = "he "
+        print("getAutocompleteSentence", Utility.getAutocompleteSentence(s, Incompletesentence))
 
 if __name__ == "__main__":
     main()
