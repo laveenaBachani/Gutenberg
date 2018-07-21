@@ -95,7 +95,7 @@ def getChapterQuoteAppears(text,sentence):
     for char in text:
         if char not in punctuations:
             res = res + char;
-    sentSplit= re.compile('[.*!]').split(res)
+    sentSplit= re.compile('[.?!]').split(res)
     chapChapter = 0
     for sent in sentSplit:
         sent.strip('\n');
@@ -106,3 +106,40 @@ def getChapterQuoteAppears(text,sentence):
                 return chapChapter
     return -1
 
+def generateSentence(s,firstWord):
+    punctuations = '''()-[]{};:'"\,<>/@#$%^&*_~'''
+    resstr = firstWord;
+    resList = [firstWord]
+    res = ""
+    for char in s:
+        if char not in punctuations:
+            res = res + char;
+
+    sentSplit = re.compile("[.?!]").split(res)
+    sentSplitforinter = sentSplit
+    map = {}
+    for i in range(0,19):
+        for sent in range(0,len(sentSplitforinter)):
+            list = sentSplitforinter[sent].split()
+            for k in range(0, len(list)):
+                if(firstWord.lower() in list[k].strip('\n').lower()):
+                    if(k!=len(list)-1):
+                        if list[k+1].strip(' ') != '' and list[k+1].strip('\n') != '' and (not list[k+1].strip(' ').isnumeric()):
+                            if list[k+1] in map:
+                                print(list[k+1])
+                                map[list[k+1]] +=1
+                            else:
+                                map[list[k+1]] = 1
+
+        sent = 0
+        max = 0
+        keyWord = ""
+        for key,value in map.items():
+            if(value>max and key not in resList):
+                max = value
+                keyWord = key
+        resstr +=" "+keyWord
+        resList.append(keyWord)
+        firstWord = keyWord
+        map = {}
+    return resstr

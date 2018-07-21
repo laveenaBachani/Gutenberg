@@ -16,6 +16,8 @@ def main():
         print("getFrequencyOfWord ", Utility.getFrequencyOfWord(text,word))
         sentence = "blooming and fragrant"
         print("getChapterQuoteAppears ",Utility.getChapterQuoteAppears(s,sentence))
+        firstWord = 'the'
+        print("generateSentence", Utility.generateSentence(s,firstWord))
 
 
 if __name__ == "__main__":
