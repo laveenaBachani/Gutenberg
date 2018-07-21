@@ -1,4 +1,5 @@
 import heapq
+import re
 
 def getTotalNumberOfWords(input):
     return len(input.split())
@@ -71,3 +72,37 @@ def get20LeastFrequentWords(text):
     smallest = heapq.nsmallest(1100, heap)
     smallest = [(key, value) for value, key in smallest]
     return smallest
+
+def getFrequencyOfWord(text, word):
+    freq = []
+    words = text.split()
+    count = 0
+    for i in range(0,len(words)):
+        if(words[i] == "CHAPTER"):
+            freq.append(count)
+            count = 0
+        else:
+            if(words[i].lower() == word.lower()):
+                count+=1
+    freq.append(count)
+    freq.pop(0)
+    return freq
+
+
+def getChapterQuoteAppears(text,sentence):
+    punctuations = '''()-[]{};:'"\,<>/@#$%^&*_~'''
+    res = ""
+    for char in text:
+        if char not in punctuations:
+            res = res + char;
+    sentSplit= re.compile('[.*!]').split(res)
+    chapChapter = 0
+    for sent in sentSplit:
+        sent.strip('\n');
+        if "CHAPTER" in sent:
+            chapChapter = chapChapter+1
+        else:
+            if sentence  in sent:
+                return chapChapter
+    return -1
+

@@ -12,7 +12,10 @@ def main():
         num = 100
         print("get20MostInterestingFrequentWords ",Utility.get20MostInterestingFrequentWords(text,num))
         print("get20LeastFrequentWords ", Utility.get20LeastFrequentWords(text))
-        
+        word = "Bosky"
+        print("getFrequencyOfWord ", Utility.getFrequencyOfWord(text,word))
+        sentence = "blooming and fragrant"
+        print("getChapterQuoteAppears ",Utility.getChapterQuoteAppears(s,sentence))
 
 
 if __name__ == "__main__":
