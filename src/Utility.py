@@ -57,6 +57,7 @@ def get20MostInterestingFrequentWords(text,num):
 def get20LeastFrequentWords(text):
     map = {}
     str = ''
+    text = text.lower()
     for i in range(0, len(text)):
         if text[i] == ' ' or '\n' in text[i]:
             str = str.strip('\n')
@@ -65,11 +66,14 @@ def get20LeastFrequentWords(text):
                     map[str.lower()] = map[str.lower()] + 1
                 else:
                     map[str.lower()] = 1
-            str = ''
-        str += text[i]
+
+                str = ''
+        if ( ord(text[i]) > 96 and ord(text[i]) < 123):
+            # print(text[i])
+            str += text[i]
 
     heap = [(value, key) for key, value in map.items()]
-    smallest = heapq.nsmallest(1100, heap)
+    smallest = heapq.nsmallest(20, heap)
     smallest = [(key, value) for value, key in smallest]
     return smallest
 
@@ -126,7 +130,6 @@ def generateSentence(s,firstWord):
                     if(k!=len(list)-1):
                         if list[k+1].strip(' ') != '' and list[k+1].strip('\n') != '' and (not list[k+1].strip(' ').isnumeric()):
                             if list[k+1] in map:
-                                print(list[k+1])
                                 map[list[k+1]] +=1
                             else:
                                 map[list[k+1]] = 1

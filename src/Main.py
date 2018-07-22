@@ -12,13 +12,13 @@ def main():
         num = 100
         print("get20MostInterestingFrequentWords ",Utility.get20MostInterestingFrequentWords(text,num))
         print("get20LeastFrequentWords ", Utility.get20LeastFrequentWords(text))
-        word = "Bosky"
+        word = "Age could not wither it, nor custom stale Its infinite variety"
         print("getFrequencyOfWord ", Utility.getFrequencyOfWord(text,word))
         sentence = "blooming and fragrant"
         print("getChapterQuoteAppears ",Utility.getChapterQuoteAppears(s,sentence))
         firstWord = 'the'
         print("generateSentence", Utility.generateSentence(s,firstWord))
-        Incompletesentence = "he "
+        Incompletesentence = "gentlemen"
         print("getAutocompleteSentence", Utility.getAutocompleteSentence(s, Incompletesentence))
 
 if __name__ == "__main__":
