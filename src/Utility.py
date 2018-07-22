@@ -1,5 +1,6 @@
 import heapq
 import re
+import difflib
 
 def getTotalNumberOfWords(input):
     return len(input.split())
@@ -69,7 +70,6 @@ def get20LeastFrequentWords(text):
 
                 str = ''
         if ( ord(text[i]) > 96 and ord(text[i]) < 123):
-            # print(text[i])
             str += text[i]
 
     heap = [(value, key) for key, value in map.items()]
@@ -253,3 +253,24 @@ class Trie:
             res.append(s)
 
         return res;
+
+def findClosestMatchingQuote(text, quote):
+    punctuations = '''()-[]{};:'"\,<>/@#$%^&*_~'''
+    res = ""
+    for char in text:
+        if char not in punctuations:
+            res = res + char
+    sentSplit = re.compile("[.?!]").split(res)
+    min = 1000
+    sentence = ""
+    for sent in sentSplit:
+        diff = ''.join(difflib.ndiff(quote,sent));
+        x = len(re.findall('[-+?]',diff))
+        print(x)
+        if min > x :
+            min  = x
+            sentence = sent
+    return sentence
+
+
+

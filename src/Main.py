@@ -1,5 +1,6 @@
 import Utility
 import string
+import difflib
 def main():
     File_name = "Book.txt"
     with open(File_name, "r")as book:
@@ -20,6 +21,8 @@ def main():
         print("generateSentence", Utility.generateSentence(s,firstWord))
         Incompletesentence = "gentlemen"
         print("getAutocompleteSentence", Utility.getAutocompleteSentence(s, Incompletesentence))
+        quote = "O the days of Qun Bess, were merry ol times!"
+        print("findClosestMatchingQuote ",Utility.findClosestMatchingQuote(s,quote))
 
 if __name__ == "__main__":
     main()
